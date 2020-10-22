@@ -35,3 +35,8 @@ td.lower-right {
   border-top: 1px solid black;
   border-left: 1px solid black;
 }
+
+.App {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
