@@ -1,3 +1,6 @@
+// keep track of the state of the players in the game.
+// to start with, we just need to know the number of times each player has won,
+// as well as who the currentPlayer is. This'll grow over time.
 const initial = {
   xWins: 0,
   oWins: 0,

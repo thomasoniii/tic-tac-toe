@@ -1,68 +1,35 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is part of OmniSci's internal tech time meeting where the engineering staff
+works on teaching programming and programming concepts to the QA staff.
 
-## Available Scripts
+For it, we've been building out a simple tic-tac-toe program in React.
 
-In the project directory, you can run:
+To install:
+git clone https://github.com/thomasoniii/tic-tac-toe
+cd tic-tac-toe
+npm install
+npm run start
 
-### `yarn start`
+This app will evolve over time, and was designed to pair with the meetings as opposed
+to be a stand-alone tutorial. But you can see roughly how the app progressed by looking
+at the commit history.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+It's also designed to be an example of iterative development - we're going to build out
+interim steps to show how a program can evolve and grow over time instead of just jumping
+straight to a final product. That inevitably means that we're going to write some code
+we won't use later - but that's okay! Interim steps can be valuable as part of the process.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+Rough game plan is:
 
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+- initial boilerplate structure of an app. Get a board up on the page, give the user
+  the ability to click on a square and cycle through X -> O -> blank.
+- Add in redux + actual players. Keep track of whose turn it is and only let the player
+  add that mark. Manually clear the board and keep score.
+- Move the board state into redux so we can keep track of it more globally, and use that
+  to build out an algoritm to determine the winner. Also clear the board when the game is done.
+  And make sure that a user cannot clear a previously set mark - only the current one.
+- Build some AIs to play against so it's not a two person local game. Start with a simple AI,
+  progress to an unbeatable one, and then refine it so the user can actually still win sometimes.
+  Let the user choose the AI.
+- wire into firebase or some other online DB to allow two players to play across the internet.
+- Improve the graphics beyond just a simple table with text.
+- Add some tests to confirm at least basic functionality.

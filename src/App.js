@@ -8,6 +8,8 @@ import PlayerComponent from "./Player";
 
 import { nextPlayer, playerWins } from "./actions/player";
 
+// the app lays out the game board as well as the display of the player information.
+
 function App({ xWins, oWins, currentPlayer, nextPlayer, playerWins }) {
   return (
     <div className="App">
