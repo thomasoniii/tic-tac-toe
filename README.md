@@ -5,13 +5,10 @@ For it, we've been building out a simple tic-tac-toe program in React.
 
 To install:
 
-git clone https://github.com/thomasoniii/tic-tac-toe
-
-cd tic-tac-toe
-
-npm install
-
-npm run start
+1. git clone https://github.com/thomasoniii/tic-tac-toe
+2. cd tic-tac-toe
+3. npm install
+4. npm run start
 
 This app will evolve over time, and was designed to pair with the meetings as opposed
 to be a stand-alone tutorial. But you can see roughly how the app progressed by looking
