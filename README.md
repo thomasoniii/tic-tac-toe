@@ -4,9 +4,13 @@ works on teaching programming and programming concepts to the QA staff.
 For it, we've been building out a simple tic-tac-toe program in React.
 
 To install:
+
 git clone https://github.com/thomasoniii/tic-tac-toe
+
 cd tic-tac-toe
+
 npm install
+
 npm run start
 
 This app will evolve over time, and was designed to pair with the meetings as opposed
