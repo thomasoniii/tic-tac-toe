@@ -1,5 +1,6 @@
-const NEXT_PLAYER = "NEXT_PLAYER";
-const PLAYER_WINS = "PLAYER_WINS";
+export const NEXT_PLAYER = "NEXT_PLAYER";
+export const PLAYER_WINS = "PLAYER_WINS";
+export const RESET_SCORES = "RESET_SCORES";
 
 // the nextPlayer function dispatches a NEXT_PLAYER action, toggling to
 // whatever player value was passed in. We could also do this automatically
@@ -18,5 +19,11 @@ export function nextPlayer(nextPlayer) {
 export function playerWins() {
   return {
     type: PLAYER_WINS,
+  };
+}
+
+export function resetScores() {
+  return {
+    type: RESET_SCORES,
   };
 }

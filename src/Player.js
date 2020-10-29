@@ -9,6 +9,8 @@ const PlayerComponent = ({
   currentPlayer = "X",
   nextPlayer,
   playerWins,
+  resetBoard,
+  resetScores,
 }) => (
   <div className="player-table">
     <div className="grid-row header-row">
@@ -32,7 +34,14 @@ const PlayerComponent = ({
       <div>{oWins}</div>
     </div>
     <div className="button-row">
-      <button onClick={() => playerWins()}>I won</button>
+      <button
+        onClick={() => {
+          playerWins();
+          resetBoard();
+        }}
+      >
+        I won
+      </button>
       <button
         onClick={() => {
           const switchToPlayer = currentPlayer === "X" ? "O" : "X";
@@ -40,6 +49,20 @@ const PlayerComponent = ({
         }}
       >
         Next Player
+      </button>
+      <button
+        onClick={() => {
+          resetBoard();
+        }}
+      >
+        Reset board
+      </button>
+      <button
+        onClick={() => {
+          resetScores();
+        }}
+      >
+        Reset Scores
       </button>
     </div>
   </div>
