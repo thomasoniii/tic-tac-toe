@@ -19,6 +19,7 @@ function App({
   playerWins,
   resetBoard,
   resetScores,
+  board,
 }) {
   return (
     <div className="App">
@@ -61,10 +62,10 @@ function App({
         xWins={xWins}
         oWins={oWins}
         currentPlayer={currentPlayer}
-        nextPlayer={nextPlayer}
         playerWins={playerWins}
         resetBoard={resetBoard}
         resetScores={resetScores}
+        board={board}
       />
     </div>
   );
@@ -75,6 +76,7 @@ const mapStateToProps = (state) => {
     xWins: state.player.xWins,
     oWins: state.player.oWins,
     currentPlayer: state.player.currentPlayer,
+    board: state.board,
   };
 };
 

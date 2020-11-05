@@ -1,6 +1,7 @@
 export const NEXT_PLAYER = "NEXT_PLAYER";
 export const PLAYER_WINS = "PLAYER_WINS";
 export const RESET_SCORES = "RESET_SCORES";
+export const IS_PLAYING = "IS_PLAYING";
 
 // the nextPlayer function dispatches a NEXT_PLAYER action, toggling to
 // whatever player value was passed in. We could also do this automatically
@@ -26,4 +27,16 @@ export function resetScores() {
   return {
     type: RESET_SCORES,
   };
+}
+
+export function setIsPlaying(isPlaying) {
+  return {
+    type: IS_PLAYING,
+    payload: { isPlaying },
+  };
+}
+
+// this is a utility function that gives us the other player.
+export function otherPlayer(currentPlayer) {
+  return currentPlayer === "X" ? "O" : "X";
 }

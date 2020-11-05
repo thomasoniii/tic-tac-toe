@@ -1,16 +1,18 @@
 import React from "react";
 import classNames from "classnames";
 
+import { checkWinner } from "./utils/game";
+
 import "./player.css";
 
 const PlayerComponent = ({
   xWins = 0,
   oWins = 0,
   currentPlayer = "X",
-  nextPlayer,
   playerWins,
   resetBoard,
   resetScores,
+  board,
 }) => (
   <div className="player-table">
     <div className="grid-row header-row">
@@ -35,20 +37,13 @@ const PlayerComponent = ({
     </div>
     <div className="button-row">
       <button
+        disabled={!checkWinner(board, currentPlayer)}
         onClick={() => {
           playerWins();
           resetBoard();
         }}
       >
         I won
-      </button>
-      <button
-        onClick={() => {
-          const switchToPlayer = currentPlayer === "X" ? "O" : "X";
-          nextPlayer(switchToPlayer);
-        }}
-      >
-        Next Player
       </button>
       <button
         onClick={() => {
