@@ -13,6 +13,10 @@ const PlayerComponent = ({
   resetBoard,
   resetScores,
   board,
+  undoMove,
+  lastCell,
+  comPlayer,
+  setComPlayer,
 }) => (
   <div className="player-table">
     <div className="grid-row header-row">
@@ -37,6 +41,12 @@ const PlayerComponent = ({
     </div>
     <div className="button-row">
       <button
+        disabled={checkWinner(board, currentPlayer) || lastCell === ""}
+        onClick={() => undoMove()}
+      >
+        Undo
+      </button>
+      <button
         disabled={!checkWinner(board, currentPlayer)}
         onClick={() => {
           playerWins();
@@ -59,6 +69,13 @@ const PlayerComponent = ({
       >
         Reset Scores
       </button>
+      <br />
+      <input
+        type="checkbox"
+        checked={Boolean(comPlayer)}
+        onChange={(e) => setComPlayer(e.target.checked)}
+      />
+      Play against computer
     </div>
   </div>
 );

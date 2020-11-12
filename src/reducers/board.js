@@ -32,7 +32,7 @@ export default function (state = initial, action) {
   switch (action.type) {
     case CLICK_CELL: {
       const newState = { ...state };
-      const { cell, player } = action.payload;
+      const { cell, player, isUndoing } = action.payload;
       // only allow the user to click on an empty cell. They should not be able to
       // click on a cell that already has a value.
       if (newState[cell] === "") {
@@ -49,6 +49,9 @@ export default function (state = initial, action) {
         }
         // and note the last cell clicked on
         newState.lastCell = cell;
+      } else if (isUndoing) {
+        newState[newState.lastCell] = "";
+        newState.lastCell = "";
       }
       return newState;
     }

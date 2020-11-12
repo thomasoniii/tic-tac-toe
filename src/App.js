@@ -6,7 +6,13 @@ import "./App.css";
 import Cell from "./Cell";
 import PlayerComponent from "./Player";
 
-import { nextPlayer, playerWins, resetScores } from "./actions/player";
+import {
+  nextPlayer,
+  playerWins,
+  resetScores,
+  undoMove,
+  setComPlayer,
+} from "./actions/player";
 import { resetBoard } from "./actions/board";
 
 // the app lays out the game board as well as the display of the player information.
@@ -20,6 +26,10 @@ function App({
   resetBoard,
   resetScores,
   board,
+  undoMove,
+  lastCell,
+  comPlayer,
+  setComPlayer,
 }) {
   return (
     <div className="App">
@@ -61,11 +71,15 @@ function App({
       <PlayerComponent
         xWins={xWins}
         oWins={oWins}
+        lastCell={lastCell}
         currentPlayer={currentPlayer}
         playerWins={playerWins}
         resetBoard={resetBoard}
         resetScores={resetScores}
         board={board}
+        undoMove={undoMove}
+        comPlayer={comPlayer}
+        setComPlayer={setComPlayer}
       />
     </div>
   );
@@ -77,6 +91,8 @@ const mapStateToProps = (state) => {
     oWins: state.player.oWins,
     currentPlayer: state.player.currentPlayer,
     board: state.board,
+    lastCell: state.board.lastCell,
+    comPlayer: state.player.comPlayer,
   };
 };
 
@@ -85,4 +101,6 @@ export default connect(mapStateToProps, {
   playerWins,
   resetBoard,
   resetScores,
+  undoMove,
+  setComPlayer,
 })(App);
