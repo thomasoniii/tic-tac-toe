@@ -1,8 +1,9 @@
-import { nextPlayer, otherPlayer, setIsPlaying } from "./player";
+import { nextPlayer, setIsPlaying } from "./player";
+import { otherPlayer, getPossiblePlays } from "../utils/player";
 import { checkWinner } from "../utils/game";
+import { getComputerPlay } from "../utils/computer";
 
-export const CLICK_CELL = "CLICK_CELL";
-export const RESET_BOARD = "RESET_BOARD";
+import { CLICK_CELL, RESET_BOARD } from "../constants";
 
 // clickCell dispatches a CLICK_CELL action with a given cell code + the player mark
 export function clickCell(cell, player) {
@@ -42,15 +43,17 @@ export function clickCell(cell, player) {
         const board = getState().board;
         // the board is an object of key/value pairs. We want to find
         // all of the squares that are empty.
-        //
-        // so we filter out only the squares that have a value of ""
-        // we also filter out the "lastCell" square, since it's not in the board.
-        const possiblePlays = Object.keys(board).filter(
-          (cell) => cell !== "lastCell" && board[cell] === ""
+
+        // computer needs to know:
+        // the board.
+        // how to click.
+
+        const comCell = getComputerPlay(
+          state.player.comLevel,
+          board,
+          state.player.comPlayer
         );
-        // finally, we just choose a random square to play in
-        const comCell =
-          possiblePlays[Math.floor(Math.random() * possiblePlays.length)];
+
         // and click on that cell, as the comPlayer.
         await dispatch(clickCell(comCell, state.player.comPlayer));
       }

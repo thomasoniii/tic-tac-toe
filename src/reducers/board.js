@@ -1,4 +1,4 @@
-import { CLICK_CELL, RESET_BOARD } from "../actions/board";
+import { CLICK_CELL, RESET_BOARD } from "../constants";
 
 /*
   now we have a board in redux. There are several different ways to structure the board object,

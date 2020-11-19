@@ -16,7 +16,9 @@ const PlayerComponent = ({
   undoMove,
   lastCell,
   comPlayer,
+  comLevel,
   setComPlayer,
+  setComLevel,
 }) => (
   <div className="player-table">
     <div className="grid-row header-row">
@@ -76,6 +78,17 @@ const PlayerComponent = ({
         onChange={(e) => setComPlayer(e.target.checked)}
       />
       Play against computer
+      <select
+        value={comLevel}
+        onChange={(e) => {
+          setComLevel(Number(e.target.value));
+        }}
+      >
+        <option value="0">Really stupid</option>
+        <option value="1">Kinda stupid</option>
+        <option value="2">Mostly smart</option>
+        <option value="3">Really smart</option>
+      </select>
     </div>
   </div>
 );

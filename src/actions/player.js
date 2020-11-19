@@ -1,10 +1,14 @@
-import { CLICK_CELL } from "./board";
+import {
+  NEXT_PLAYER,
+  PLAYER_WINS,
+  RESET_SCORES,
+  IS_PLAYING,
+  SET_COM_PLAYER,
+  CLICK_CELL,
+  SET_COM_LEVEL,
+} from "../constants";
 
-export const NEXT_PLAYER = "NEXT_PLAYER";
-export const PLAYER_WINS = "PLAYER_WINS";
-export const RESET_SCORES = "RESET_SCORES";
-export const IS_PLAYING = "IS_PLAYING";
-export const SET_COM_PLAYER = "SET_COM_PLAYER";
+import { otherPlayer } from "../utils/player";
 
 // the nextPlayer function dispatches a NEXT_PLAYER action, toggling to
 // whatever player value was passed in. We could also do this automatically
@@ -58,7 +62,9 @@ export function setComPlayer(isCom) {
   };
 }
 
-// this is a utility function that gives us the other player.
-export function otherPlayer(currentPlayer) {
-  return currentPlayer === "X" ? "O" : "X";
+export function setComLevel(level) {
+  return {
+    type: SET_COM_LEVEL,
+    payload: { level },
+  };
 }

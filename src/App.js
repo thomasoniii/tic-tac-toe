@@ -12,6 +12,7 @@ import {
   resetScores,
   undoMove,
   setComPlayer,
+  setComLevel,
 } from "./actions/player";
 import { resetBoard } from "./actions/board";
 
@@ -30,6 +31,8 @@ function App({
   lastCell,
   comPlayer,
   setComPlayer,
+  comLevel,
+  setComLevel,
 }) {
   return (
     <div className="App">
@@ -80,6 +83,8 @@ function App({
         undoMove={undoMove}
         comPlayer={comPlayer}
         setComPlayer={setComPlayer}
+        comLevel={comLevel}
+        setComLevel={setComLevel}
       />
     </div>
   );
@@ -93,6 +98,7 @@ const mapStateToProps = (state) => {
     board: state.board,
     lastCell: state.board.lastCell,
     comPlayer: state.player.comPlayer,
+    comLevel: state.player.comLevel,
   };
 };
 
@@ -103,4 +109,5 @@ export default connect(mapStateToProps, {
   resetScores,
   undoMove,
   setComPlayer,
+  setComLevel,
 })(App);

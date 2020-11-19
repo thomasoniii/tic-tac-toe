@@ -4,10 +4,11 @@ import {
   RESET_SCORES,
   IS_PLAYING,
   SET_COM_PLAYER,
-  otherPlayer,
-} from "../actions/player";
+  RESET_BOARD,
+  SET_COM_LEVEL,
+} from "../constants";
 
-import { RESET_BOARD } from "../actions/board";
+import { otherPlayer } from "../utils/player";
 
 // keep track of the state of the players in the game.
 // to start with, we just need to know the number of times each player has won,
@@ -18,6 +19,7 @@ const initial = {
   currentPlayer: "X",
   startingPlayer: "X",
   comPlayer: undefined,
+  comLevel: 0,
   isPlaying: true,
 };
 
@@ -69,6 +71,10 @@ export default function (state = initial, action) {
         newState.comPlayer = otherPlayer(newState.startingPlayer);
       }
       return newState;
+    }
+    case SET_COM_LEVEL: {
+      const { level } = action.payload;
+      return { ...state, comLevel: level };
     }
     // RESET_BOARD is -not- an action associated with the player state, but we still want
     // to respond to it. Here, we just know that if a user has reset the board, that a new
