@@ -1,5 +1,6 @@
 import { getPossiblePlays } from "./player";
 import { checkWinner } from "./game";
+import { otherPlayer } from "./player";
 
 const comDispatch = [
   getComputerPlayReallyStupid, // 0
@@ -36,10 +37,49 @@ function getComputerPlayKindaStupid(board, player) {
   return possiblePlays[Math.floor(Math.random() * possiblePlays.length)];
 }
 
-function getComputerPlayMostlySmart(board) {
+function getComputerPlayMostlySmart(board, player) {
   throw new Error("cannot play against mostly smart computer");
 }
 
-function getComputerPlayReallySmart(board) {
-  throw new Error("cannot play against really smart computer");
+function minmax(board, player, winningMove = false) {
+  const possiblePlays = getPossiblePlays(board);
+  const scores = [];
+  for (const possiblePlay of possiblePlays) {
+    const possibleBoard = { ...board, [possiblePlay]: player };
+    const isWinner = checkWinner(possibleBoard, player) ? 1 : 0;
+    const isLoser = checkWinner(possibleBoard, otherPlayer(player)) ? -1 : 0;
+    if (isWinner || isLoser) {
+      // { possiblePlay : "M", score : 1}
+      scores.push({ possiblePlay, score: Math.max(isWinner, isLoser) });
+    } else {
+      const score = -getComputerPlayReallySmart(
+        possibleBoard,
+        otherPlayer(player)
+      );
+
+      scores.push({ possiblePlay, score });
+    }
+  }
+  let max = 0;
+  let play = undefined;
+  for (const group of scores) {
+    if (group.score > max) {
+      play = group.possiblePlay;
+    }
+    max = Math.max(max, group.score);
+  }
+
+  if (winningMove) {
+    if (play !== undefined) {
+      return play;
+    } else {
+      return possiblePlays[Math.floor(Math.random() * possiblePlays.length)];
+    }
+  } else {
+    return max;
+  }
+}
+
+function getComputerPlayReallySmart(board, player) {
+  return minmax(board, player, true);
 }
