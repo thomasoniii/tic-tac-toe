@@ -38,48 +38,39 @@ function getComputerPlayKindaStupid(board, player) {
 }
 
 function getComputerPlayMostlySmart(board, player) {
-  throw new Error("cannot play against mostly smart computer");
+  if (Math.random() < 0.6) {
+    return getComputerPlayReallySmart(board, player);
+  } else {
+    return getComputerPlayReallyStupid(board);
+  }
 }
 
-function minmax(board, player, winningMove = false) {
+function minmax(board, player) {
+  // if we have a winner, then return it.
+  if (checkWinner(board, player)) {
+    return { score: 1 };
+  }
+
+  let score = Number.MIN_SAFE_INTEGER;
+  let move = undefined;
+
   const possiblePlays = getPossiblePlays(board);
-  const scores = [];
   for (const possiblePlay of possiblePlays) {
     const possibleBoard = { ...board, [possiblePlay]: player };
-    const isWinner = checkWinner(possibleBoard, player) ? 1 : 0;
-    const isLoser = checkWinner(possibleBoard, otherPlayer(player)) ? -1 : 0;
-    if (isWinner || isLoser) {
-      // { possiblePlay : "M", score : 1}
-      scores.push({ possiblePlay, score: Math.max(isWinner, isLoser) });
-    } else {
-      const score = -getComputerPlayReallySmart(
-        possibleBoard,
-        otherPlayer(player)
-      );
-
-      scores.push({ possiblePlay, score });
+    let moveScore = -minmax(possibleBoard, otherPlayer(player)).score;
+    if (moveScore > score) {
+      score = moveScore;
+      move = possiblePlay;
     }
-  }
-  let max = 0;
-  let play = undefined;
-  for (const group of scores) {
-    if (group.score > max) {
-      play = group.possiblePlay;
-    }
-    max = Math.max(max, group.score);
   }
 
-  if (winningMove) {
-    if (play !== undefined) {
-      return play;
-    } else {
-      return possiblePlays[Math.floor(Math.random() * possiblePlays.length)];
-    }
-  } else {
-    return max;
+  if (move === undefined) {
+    return { score: 0 };
   }
+
+  return { score, move };
 }
 
 function getComputerPlayReallySmart(board, player) {
-  return minmax(board, player, true);
+  return minmax(board, player, true).move;
 }

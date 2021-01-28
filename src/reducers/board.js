@@ -15,7 +15,7 @@ import { CLICK_CELL, RESET_BOARD } from "../constants";
    move once and that they can't change the board.
 */
 
-const initial = {
+export const initial = {
   TL: "",
   T: "",
   TR: "",
