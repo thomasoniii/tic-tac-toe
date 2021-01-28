@@ -21,6 +21,8 @@ import {
   resetScores,
   undoMove,
   setIsPlaying,
+  setComPlayer,
+  setComLevel,
 } from "./player";
 
 const middlewares = [thunk];
@@ -59,10 +61,10 @@ describe("player action tests", () => {
       payload: { isPlaying: "X" },
     });
   });
-  it("can get undoMove", () => {
+  it("can get undoMove", async () => {
     const store = mockStore(initialState);
 
-    store.dispatch(undoMove());
+    store.dispatch(await undoMove());
 
     const actions = store.getActions();
 
@@ -77,6 +79,18 @@ describe("player action tests", () => {
       payload: { cell: "", isUndoing: true },
     });
   });
-  it.todo("can get setComPlayer");
-  it.todo("can get setComLevel");
+  it("can get setComPlayer", () => {
+    const COMPUTER = true;
+    expect(setComPlayer(COMPUTER)).toEqual({
+      type: SET_COM_PLAYER,
+      payload: { isCom: COMPUTER },
+    });
+  });
+  it("can get setComLevel", () => {
+    const COMPUTER = 1;
+    expect(setComLevel(COMPUTER)).toEqual({
+      type: SET_COM_LEVEL,
+      payload: { level: COMPUTER },
+    });
+  });
 });
